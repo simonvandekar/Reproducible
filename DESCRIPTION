@@ -1,13 +1,21 @@
 Package: Reproducible
-Title: What the Package Does (One Line, Title Case)
+Title: Reproducible Research using R Markdown
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Simon",
+           family = "Vandekar",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: What license it uses
+           email = "simon.vandekar@vanderbilt.edu",
+           comment = c(ORCID = "https://orcid.org/0000-0002-7457-9073"))
+    person(given = "Alessandra",
+           family = "Valcarcel",
+           role = c("aut", "cre"),
+           email = "alval@pennmedicine.upenn.edu")
+Description: This is a tutorial on how to do reproducible research using R Markdown and R.
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
+Imports:
+  devtools,
+  knitr,
+  rmarkdown
