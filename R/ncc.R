@@ -14,7 +14,8 @@
 # gives the lower endpoint, the second column gives the upper endpoint,
 # and the third column is a label for the type of interval.
 
-#' chi distribution function.
+#' Chi distribution function.
+#'
 #' Code taken by SNV from https://www1.maths.leeds.ac.uk/~john/software/ncc/ncc.r.
 #'
 #' @export
@@ -43,6 +44,7 @@ lambound=function(y,p,alpha) {
 }
 
 #' Finds root of distribution function minus alpha.
+#'
 #' Code taken by SNV from https://www1.maths.leeds.ac.uk/~john/software/ncc/ncc.r.
 #'
 #' @param y numeric, value of chi random variable.
@@ -58,6 +60,7 @@ lamfind=function(y,p,alpha) {
 
 
 #' Central confidence interval for chi-square noncentrality parameter.
+#'
 #' Code taken by SNV from https://www1.maths.leeds.ac.uk/~john/software/ncc/ncc.r.
 #'
 #' @export
@@ -84,6 +87,7 @@ ncc.ci.central=function(y,p,alpha=0.05) {
 
 
 #' Symmetric range confidence interval for chi-square noncentrality parameter.
+#'
 #' Code taken by SNV from https://www1.maths.leeds.ac.uk/~john/software/ncc/ncc.r.
 #'
 #' @export
@@ -110,6 +114,7 @@ ncc.ci.sr=function(y,p,alpha=0.05) {
 }
 
 #' Return two confidence intervals for noncentrality parameter of a chi-square distribution.
+#'
 #' Code taken by SNV from https://www1.maths.leeds.ac.uk/~john/software/ncc/ncc.r.
 #'
 #' @export

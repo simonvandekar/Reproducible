@@ -2,8 +2,7 @@
 % Please edit documentation in R/ncc.R
 \name{F}
 \alias{F}
-\title{chi distribution function.
-Code taken by SNV from https://www1.maths.leeds.ac.uk/~john/software/ncc/ncc.r.}
+\title{Chi distribution function.}
 \usage{
 F(u, p, lambda)
 }
@@ -15,6 +14,5 @@ F(u, p, lambda)
 \item{lambda, }{noncentrality parameter of chi distribution.}
 }
 \description{
-chi distribution function.
 Code taken by SNV from https://www1.maths.leeds.ac.uk/~john/software/ncc/ncc.r.
 }

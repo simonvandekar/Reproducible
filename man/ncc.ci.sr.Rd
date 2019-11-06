@@ -2,8 +2,7 @@
 % Please edit documentation in R/ncc.R
 \name{ncc.ci.sr}
 \alias{ncc.ci.sr}
-\title{Symmetric range confidence interval for chi-square noncentrality parameter.
-Code taken by SNV from https://www1.maths.leeds.ac.uk/~john/software/ncc/ncc.r.}
+\title{Symmetric range confidence interval for chi-square noncentrality parameter.}
 \usage{
 ncc.ci.sr(y, p, alpha = 0.05)
 }
@@ -15,6 +14,5 @@ ncc.ci.sr(y, p, alpha = 0.05)
 \item{alpha, }{probability for confidence interval.}
 }
 \description{
-Symmetric range confidence interval for chi-square noncentrality parameter.
 Code taken by SNV from https://www1.maths.leeds.ac.uk/~john/software/ncc/ncc.r.
 }

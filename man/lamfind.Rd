@@ -2,8 +2,7 @@
 % Please edit documentation in R/ncc.R
 \name{lamfind}
 \alias{lamfind}
-\title{Finds root of distribution function minus alpha.
-Code taken by SNV from https://www1.maths.leeds.ac.uk/~john/software/ncc/ncc.r.}
+\title{Finds root of distribution function minus alpha.}
 \usage{
 lamfind(y, p, alpha)
 }
@@ -15,6 +14,5 @@ lamfind(y, p, alpha)
 \item{alpha, }{probability.}
 }
 \description{
-Finds root of distribution function minus alpha.
 Code taken by SNV from https://www1.maths.leeds.ac.uk/~john/software/ncc/ncc.r.
 }
