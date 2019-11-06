@@ -116,6 +116,7 @@ git clone https://github.com/simonvandekar/Reproducible
 ```
 
 
+
 ## Structure of an R package
 
 ### An R package is a bunch of functions related to a certain project.
@@ -136,11 +137,13 @@ git clone https://github.com/simonvandekar/Reproducible
  * If someone else has made an R package for their reproducible research and stored it on github you can install it on your system
  * For example, install [this package](https://github.com/simonvandekar/Reproducible):
  
-```{r, cache=TRUE}
+```{r}
 devtools::install_github('simonvandekar/Reproducible', force=TRUE) # force just forces reinstall even if there is no update since previous install
 ```
  
 
+## Your project workflow can map directly onto and R package
+![](inst/images/projectworkflow.png)
 
 
 
@@ -162,13 +165,13 @@ devtools::install_github('simonvandekar/Reproducible', force=TRUE) # force just 
 
  * There are many options for formatting the output of your markdown document
 
-   + [html output options](https://bookdown.org/yihui/rmarkdown/html-document.html)
+   + [html options](https://bookdown.org/yihui/rmarkdown/html-document.html)
    + [revealjs options](https://github.com/rstudio/revealjs)
 
 ## Writing R (or other) Code in an R Markdown Document
 
   
-```{r, cache=TRUE, message=FALSE, results='hide'}
+```{r, cache=FALSE, message=FALSE, results='hide'}
 # THIS IS SOME CODE TO RUN SIMULATIONS FOR A PAPER
 
 library(Reproducible) # load functions from this package!
@@ -290,18 +293,67 @@ git push origin master
 
 
 
-## Exporting, Documenting, and Compiling Functions
+# Exporting, Documenting, and Compiling Functions
 
  * There are some R functions that I've already put into the R directory to help me run the simulations.
  * For example, we can open the code [ncc.ints](https://github.com/simonvandekar/Reproducible/blob/master/R/ncc.R) function within this package
-```{r}
-library(Reproducible)
+```{r, eval=FALSE}
 ?ncc.ints
 ```
+
+## Adding functions while you work
+
+ * My nested for loop is pretty hard to read; the simulations could be packaged more neatly.
+ * It might make sense to bundle parts of the code together into [components](https://github.com/simonvandekar/Reproducible/blob/master/R/es_sim.R) that are documented functions in this package.
+ * Then, they have their own help files and this README stays readable.
  
+## Rewritten simulation code
+ 
+```{r, eval=TRUE}
 
-## Installing an R package from Github or Bitbucket
+library(Reproducible) # load functions from this package!
+library(pracma) # for sqrtm
+library(sandwich) # for robust covariance matrices
+library(lmtest) # for robust tests
+set.seed(666)
+nsim=2 # low number of sims for this example
+alpha=0.05
+# controls skewness of gamma
+shapes = c(0.5, 10)
+ns = c(25, 50, 100, 250, 500, 1000)
+SIs = c(0, 0.1, 0.25, 0.4, 0.6)
+m1s = c(1,3,5)
+m0s = c(2,5)
+rhosqs = c(0, .6)
+hetero = 1 # x variable that induces heterogeneity. 0 for none
+out = expand.grid(shape=shapes, n=ns, m1=m1s, m0=m0s, S=SIs, rhosq=rhosqs)
+params = names(out)
+out[, c('bias', 'coverage.central', 'coverage.sr', 'width.central', 'width.sr')] = NA
+# testing SI=SIs[1]; n=ns[1]; shape=shapes[1]; m1=m1s[1]; m0=m0s[1]; rhosq=rhosqs[2]; hetero=1
+# function that collapses two compiled simulation functions.
+sim.func = function(shape, n, m1, m0, S, rhosq, hetero){
+              simparameters = simSetup(S=S, m1=m1, m0=m0, rhosq=rhosq, hetero=hetero)
+              simFunc(simparameters, shape=shape, n=n, alpha=0.05)
+            }
+for( rhosq in rhosqs){
+    for(SI in SIs){
+      for(m1 in m1s){
+      for(m0 in m0s){
+        for(n in ns){
+          for(shape in shapes){
+            cat(paste(shape, n, m1, m0, SI, rhosq, collapse=','), '\t')
+            temp = t(replicate(nsim, sim.func(shape, n, m1, m0, SI, rhosq, hetero)))
+            out[which( out$shape==shape & out$n==n & out$m1==m1 & out$m0==m0 & out$S==SI & out$rhosq==rhosq), c('variance', 'bias', 'coverage.central', 'coverage.sr', 'width.central', 'width.sr')] = c(var(temp[,1]), colMeans(temp))
+          }
+        }
+      }
+    }
+  }
+}
 
+
+```
+ 
 
 
 # Other stuff
@@ -314,8 +366,9 @@ library(Reproducible)
 
 ## Important Resources That I Have Neglected
 
- * There are many important tools that I have (embarrassingly) neglected to talk about because I have not learned them myself (e.g. `tidyverse`, `testthat`).
+ * There are many important tools that I have neglected to talk about because I have not learned them myself (embarrassingly ; e.g. `tidyverse`, `testthat`).
 
+ * [tidyverse](https://www.tidyverse.org/)
  * [CRAN Reproducible Research](https://cran.r-project.org/web/views/ReproducibleResearch.html)
 
 
