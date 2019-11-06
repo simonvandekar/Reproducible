@@ -4,15 +4,16 @@ author:
  Simon Vandekar, Ali Valcarcel \n
 date: "`r format(Sys.time(), '%d %B %Y')`"
 output:
+  html_document:
+    toc: true
+    toc_float: true
   revealjs::revealjs_presentation:
     theme: moon
+    highlight: zenburn
     reveal_options:
       slideNumber: true
       previewLinks: true
       center: true
-  html_document:
-    toc: true
-    toc_float: true
   github_document:
     html_preview: true
 ---
@@ -66,8 +67,20 @@ knitr::opts_chunk$set(echo = TRUE)
  * Content of R package will serve as basis for your publication.
  * __Important note__: Github repositories are public by default; do not put an unpublished paper in a public repository!
 
+## This Document is an Example of a Reproducible Research R Package
+
+ * This document itself is part of an R package
+ * Clone it from git!
+
+```{bash, eval=FALSE}
+cd ~/
+git clone https://github.com/simonvandekar/Reproducible
+```
+
 
 ## Structure of an R package
+
+
 
 
 
@@ -89,8 +102,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Mac OS
 
  * I like to use [Homebrew](https://brew.sh) for managing software.
- * Be sure to pay attention to homebrew output to be sure installation proceeds correctly.
-  + Homebrew needs to create symlinks and that sometimes fails.
+ * Be sure to pay attention to Homebrew output to be sure installation completes successfully.
+   + Specifically, Homebrew needs to create symlinks and that sometimes fails.
  * xcode command line tools are necessary for developing R packages.
  * Can install R and Rstudio at the command line (after installing homebrew)
 ```{bash, eval=FALSE}
@@ -103,8 +116,8 @@ brew cask install --appdir=/Applications rstudio # install R-studio (GUI for R)
 
 * Sorry, I'm not much use with Windows, but all software is supported for Windows.
 * Check out
- + [R on CRAN](https://cran.r-project.org/)
- + [Rstudio](https://rstudio.com/)
+  + [R on CRAN](https://cran.r-project.org/)
+  + [Rstudio](https://rstudio.com/)
 
 ## Rstudio looks like this
 
@@ -139,23 +152,26 @@ There are many options for formatting the output of your markdown document
 
 ## Writing R (or other) Code in an R Markdown Document
 
-### Cloning and Updating with Git
 
-### Installing an R package from Github or Bitbucket
 
-### Exporting, Documenting, and Compiling Functions
+## Cloning and Updating with Git
+
+## Installing an R package from Github or Bitbucket
+
+## Exporting, Documenting, and Compiling Functions
+
 
 # Other stuff
 
 ## Disclaimers
 
-I am not an expert in reproducible methods and am actively learning the best way to do reproducible research using R Markdown, Git, and Docker.
-The R Markdown document is conducive with other languages, such as Python, Bash, and Stan.
-There are other tools (e.g. Jupyter Notebook) that have similar functionality and __may__ be better suited for other programming languages.
+ * I am not an expert in reproducible software and am actively learning the best way to do reproducible research using R Markdown, Git, and Docker.
+ * The R Markdown document is conducive with other languages, such as Python, Bash, and Stan.
+ * There are other tools (e.g. Jupyter Notebook) that have similar functionality and __may__ be better suited for other programming languages.
 
 ## Important Resources That I Have Neglected
 
-There are many important tools that I have (embarrassingly) neglected to talk about because I have not learned them myself (e.g. `tidyverse`, `testthat`).
+ * There are many important tools that I have (embarrassingly) neglected to talk about because I have not learned them myself (e.g. `tidyverse`, `testthat`).
 
  * [CRAN Reproducible Research](https://cran.r-project.org/web/views/ReproducibleResearch.html)
 
