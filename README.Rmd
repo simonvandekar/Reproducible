@@ -4,9 +4,6 @@ author:
  Simon Vandekar, Ali Valcarcel \n
 date: "`r format(Sys.time(), '%d %B %Y')`"
 output:
-  html_document:
-    toc: true
-    toc_float: true
   revealjs::revealjs_presentation:
     theme: moon
     highlight: zenburn
@@ -14,6 +11,9 @@ output:
       slideNumber: true
       previewLinks: true
       center: true
+  html_document:
+    toc: true
+    toc_float: true
   github_document:
     html_preview: true
 ---
@@ -57,43 +57,6 @@ knitr::opts_chunk$set(echo = TRUE)
  * This tutorial is not designed to teach you the basics of R (sorry).
 
 
-# Reproducible Research using R packages
-## Why?!?
-
- * R packages are what developers use for releasing new statistical software.
- * Turns out, they're super useful for keeping track of your notes and code for research as well.
- * Everything is version controlled with Git and checked using tools in R.
- * Once your project is finalized, your notes and code can be distributed within the R package.
- * Content of R package will serve as basis for your publication.
- * __Important note__: Github repositories are public by default; do not put an unpublished paper in a public repository!
-
-## This Document is an Example of a Reproducible Research R Package
-
- * This document itself is part of an R package
- * Clone it from git!
-
-```{bash, eval=FALSE}
-cd ~/
-git clone https://github.com/simonvandekar/Reproducible
-```
-
-
-## Structure of an R package
-
-### An R package is a bunch of functions related to a certain project.
-
-![](inst/images/packagestructure.png)
-
-## Structure of an R package
-
- * `R/` -- directory for R functions that make up
- * `src/` -- directory of C++ functions that you've wrapped into `R` using `Rcpp`
- * `vignettes/` -- directory of one or more Markdown documents to illustrate use of package
- * `README.Rmd` -- the uncompiled version of this document
- * `README.*` -- other compiled versions of this document
- * `DESCRIPTION` -- stuff about package you would need to edit
-
-
 # Installing R and Rstudio {.tabset}
 
 ## Linux
@@ -132,6 +95,54 @@ brew cask install --appdir=/Applications rstudio # install R-studio (GUI for R)
 
 ![](inst/images/rstudio.png)
 
+# Reproducible Research using R packages
+## Why?!?
+
+ * R packages are what developers use for releasing new statistical software.
+ * Turns out, they're super useful for keeping track of your notes and code for research as well.
+ * Everything is version controlled with Git and checked using tools in R.
+ * Once your project is finalized, your notes and code can be distributed within the R package.
+ * Content of R package will serve as basis for your publication.
+ * __Important note__: Github repositories are public by default; do not put an unpublished paper in a public repository!
+
+## This Document is an Example of a Reproducible Research R Package
+
+ * This document itself is part of an R package
+ * Clone it from git!
+
+```{bash, eval=FALSE}
+cd ~/
+git clone https://github.com/simonvandekar/Reproducible
+```
+
+
+## Structure of an R package
+
+### An R package is a bunch of functions related to a certain project.
+
+![](inst/images/packagestructure.png)
+
+## Structure of an R package
+
+ * `R/` -- directory for R functions that make up
+ * `src/` -- directory of C++ functions that you've wrapped into `R` using `Rcpp`
+ * `vignettes/` -- directory of one or more Markdown documents to illustrate use of package
+ * `README.Rmd` -- the uncompiled version of this document
+ * `README.*` -- other compiled versions of this document
+ * `DESCRIPTION` -- stuff about package you would need to edit
+
+## Installing an R package from github
+
+ * If someone else has made an R package for their reproducible research and stored it on github you can install it on your system
+ * For example, install [this package](https://github.com/simonvandekar/Reproducible):
+ 
+```{r, cache=TRUE}
+devtools::install_github('simonvandekar/Reproducible', force=TRUE) # force just forces reinstall even if there is no update since previous install
+```
+ 
+
+
+
 
 
 # Creating an R package for Reproducible Research
@@ -156,7 +167,6 @@ brew cask install --appdir=/Applications rstudio # install R-studio (GUI for R)
 
 ## Writing R (or other) Code in an R Markdown Document
 
-  * We can write code right here
   
 ```{r, cache=TRUE, message=FALSE, results='hide'}
 # THIS IS SOME CODE TO RUN SIMULATIONS FOR A PAPER
@@ -249,7 +259,7 @@ for( rhosq in rhosqs){
  
  
  
- This is the code to plot the simulation results. 
+## This is the code to plot the simulation results. 
 ```{r, fig.cap="Example plot of simulation results."}
 library(lattice)
 # setwd('~/Box Sync/work/nonparametric_effect_size'); library(qwraps2); lazyload_cache_labels('graphics-simulations')
@@ -281,6 +291,14 @@ git push origin master
 
 
 ## Exporting, Documenting, and Compiling Functions
+
+ * There are some R functions that I've already put into the R directory to help me run the simulations.
+ * For example, we can open the code [ncc.ints](https://github.com/simonvandekar/Reproducible/blob/master/R/ncc.R) function within this package
+```{r}
+library(Reproducible)
+?ncc.ints
+```
+ 
 
 ## Installing an R package from Github or Bitbucket
 

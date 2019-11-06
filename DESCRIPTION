@@ -18,4 +18,9 @@ LazyData: true
 Imports:
   devtools,
   knitr,
-  rmarkdown
+  lmtest,
+  pracma,
+  rmarkdown,
+  sandwich,
+  stats,
+RoxygenNote: 6.1.1
