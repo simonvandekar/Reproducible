@@ -1,7 +1,7 @@
 Reproducible Research in R and R Markdown
 ================
 Simon Vandekar, Ali Valcarcel
-05 November 2019
+06 November 2019
 
 # What is Reproducible Research?
 
@@ -30,7 +30,7 @@ Simon Vandekar, Ali Valcarcel
   - [Replicability](https://www.biorxiv.org/content/10.1101/066803v1) is
     a statistical feature (that we’re not talking about today).
 
-# Why R and R Markdown for Reproducible Research?
+# Why use R and R Markdown for Reproducible Research?
 
 ## Why?\!?
 
@@ -46,27 +46,15 @@ Simon Vandekar, Ali Valcarcel
   - This tutorial is designed to show you that it is possible to do
     fully reproducible research using R Markdown and (hopefully) that it
     is accessible without too much effort.
+  - It is a high overview of what can be done with R Markdown, Git, and
+    R.
+  - There are links to resources throughout; feel free to explore.
     <p>
     </p>
     <p>
     </p>
     ### Not the Point of This Tutorial:
   - This tutorial is not designed to teach you the basics of R (sorry).
-
-# Reproducible Research using R packages
-
-## Why?\!?
-
-  - R packages are what developers use for releasing new statistical
-    software.
-  - Turns out, they’re super useful for keeping track of your notes and
-    code for research as well.
-  - Once your project is finalized, your notes and code can be
-    distributed within the R package.
-  - **Important note**: Github repositories are public by default; do
-    not put an unpublished paper in a public repository\!
-
-## Structure of an R package
 
 # Installing R and Rstudio
 
@@ -87,9 +75,10 @@ wget https://download1.rstudio.org/desktop/bionic/amd64/rstudio-1.2.5019-amd64.d
 ## Mac OS
 
   - I like to use [Homebrew](https://brew.sh) for managing software.
-  - Be sure to pay attention to homebrew output to be sure installation
-    proceeds correctly.
-  - Homebrew needs to create symlinks and that sometimes fails.
+  - Be sure to pay attention to Homebrew output to be sure installation
+    completes successfully.
+      - Specifically, Homebrew needs to create symlinks and that
+        sometimes fails.
   - xcode command line tools are necessary for developing R packages.
   - Can install R and Rstudio at the command line (after installing
     homebrew)
@@ -107,72 +96,356 @@ brew cask install --appdir=/Applications rstudio # install R-studio (GUI for R)
   - Sorry, I’m not much use with Windows, but all software is supported
     for Windows.
   - Check out
-  - [R on CRAN](https://cran.r-project.org/)
-  - [Rstudio](https://rstudio.com/)
+      - [R on CRAN](https://cran.r-project.org/)
+      - [Rstudio](https://rstudio.com/)
 
 ## Rstudio looks like this
 
 ![](inst/images/rstudio.png)
 
+# Reproducible Research using R packages
+
+## Why?\!?
+
+  - R packages are what developers use for releasing new statistical
+    software.
+  - Turns out, they’re super useful for keeping track of your notes and
+    code for research as well.
+  - Everything is version controlled with Git and checked using tools in
+    R.
+  - Once your project is finalized, your notes and code can be
+    distributed within the R package.
+  - Content of R package will serve as basis for your publication.
+  - **Important note**: Github repositories are public by default; do
+    not put an unpublished paper in a public repository\!
+
+## This Document is an Example of a Reproducible Research R Package
+
+  - This document itself is part of an R package
+  - Clone it from git\!
+
+<!-- end list -->
+
+``` bash
+cd ~/
+git clone https://github.com/simonvandekar/Reproducible
+```
+
+## Structure of an R package
+
+### An R package is a bunch of functions related to a certain project.
+
+![](inst/images/packagestructure.png)
+
+## Structure of an R package
+
+  - `R/` – directory for R functions that make up
+  - `src/` – directory of C++ functions that you’ve wrapped into `R`
+    using `Rcpp`
+  - `vignettes/` – directory of one or more Markdown documents to
+    illustrate use of package
+  - `README.Rmd` – the uncompiled version of this document
+  - `README.*` – other compiled versions of this document
+  - `DESCRIPTION` – stuff about package you would need to edit
+
+## Installing an R package from github
+
+  - If someone else has made an R package for their reproducible
+    research and stored it on github you can install it on your system
+  - For example, install [this
+    package](https://github.com/simonvandekar/Reproducible):
+
+<!-- end list -->
+
+``` r
+devtools::install_github('simonvandekar/Reproducible', force=TRUE) # force just forces reinstall even if there is no update since previous install
+```
+
+    ## Downloading GitHub repo simonvandekar/Reproducible@master
+
+    ## 
+    ##   
+       checking for file ‘/private/var/folders/m9/qpvyktss12d_c8fjdt840h3w0000gn/T/RtmpIKoOuF/remotes66f37850ee7e/simonvandekar-Reproducible-ea14c7b/DESCRIPTION’ ...
+      
+    ✔  checking for file ‘/private/var/folders/m9/qpvyktss12d_c8fjdt840h3w0000gn/T/RtmpIKoOuF/remotes66f37850ee7e/simonvandekar-Reproducible-ea14c7b/DESCRIPTION’
+    ## 
+      
+    ─  preparing ‘Reproducible’:
+    ## 
+      
+       checking DESCRIPTION meta-information ...
+      
+    ✔  checking DESCRIPTION meta-information
+    ## 
+      
+    ─  checking for LF line-endings in source and make files and shell scripts
+    ## 
+      
+    ─  checking for empty or unneeded directories
+    ## 
+      
+         NB: this package now depends on R (>= 3.5.0)
+    ## 
+      
+         WARNING: Added dependency on R >= 3.5.0 because serialized objects in  serialize/load version 3 cannot be read in older versions of R.  File(s) containing such objects:  'Reproducible/README_cache/html/unnamed-chunk-4_821df4ba7549e596ef0b791ecdc63eeb.RData'  WARNING: Added dependency on R >= 3.5.0 because serialized objects in  serialize/load version 3 cannot be read in older versions of R.  File(s) containing such objects:  'Reproducible/README_cache/html/unnamed-chunk-4_821df4ba7549e596ef0b791ecdc63eeb.rdx'  WARNING: Added dependency on R >= 3.5.0 because serialized objects in  serialize/load version 3 cannot be read in older versions of R.  File(s) containing such objects:  'Reproducible/README_cache/revealjs/unnamed-chunk-4_caae04e3fa4cd5144c2a85d478ae6e0c.RData'  WARNING: Added dependency on R >= 3.5.0 because serialized objects in  serialize/load version 3 cannot be read in older versions of R.  File(s) containing such objects:  'Reproducible/README_cache/revealjs/unnamed-chunk-4_caae04e3fa4cd5144c2a85d478ae6e0c.rdx'  WARNING: Added dependency on R >= 3.5.0 because serialized objects in  serialize/load version 3 cannot be read in older versions of R.  File(s) containing such objects:  'Reproducible/README_cache/revealjs/unnamed-chunk-5_3d820dfba4bf6a85cb522cb260255044.RData'  WARNING: Added dependency on R >= 3.5.0 because serialized objects in  serialize/load version 3 cannot be read in older versions of R.  File(s) containing such objects:  'Reproducible/README_cache/revealjs/unnamed-chunk-5_3d820dfba4bf6a85cb522cb260255044.rdx'
+    ## 
+      
+    ─  building 'Reproducible_0.0.0.9000.tar.gz'
+    ## 
+      
+       
+    ## 
+
+    ## Installing package into '/usr/local/lib/R/3.6/site-library'
+    ## (as 'lib' is unspecified)
+
+## Your project workflow can map directly onto and R package
+
+![](inst/images/projectworkflow.png)
+
 # Creating an R package for Reproducible Research
 
 ## Writing an R Markdown Document
 
-As far as I know, R Markdown can use all the same syntax as regular
-Markdown. You can type equations using syntax similar to latex. R
-Markdown documents can be compiled to a github README (like this
-document), html, pdf, word doc, or many other types of documents.
-
-  - Some document formats:
-    
-      - github\_document, html\_document, pdf\_document
-
-  - Some presentation formats:
-    
-      - ioslides\_presentation, slidy\_presentation,
-        revealjs::revealjs\_presentation
-
+  - As far as I know, R Markdown can use all the same syntax as regular
+    Markdown. You can type equations using syntax similar to latex.
+  - R Markdown documents can be compiled to a github README, html, pdf,
+    word doc, or many other types of documents.
+      - Some document formats: github\_document, html\_document,
+        pdf\_document
+      - Some presentation formats: ioslides\_presentation,
+        slidy\_presentation, revealjs::revealjs\_presentation
   - Some basic syntax references can be found here
-
-  - [Markdown
-    Basics](https://rmarkdown.rstudio.com/authoring_basics.html)
-
-  - [Mathematics in R
-    Markdown](https://www.calvin.edu/~rpruim/courses/s341/S17/from-class/MathinRmd.html)
+      - [Markdown
+        Basics](https://rmarkdown.rstudio.com/authoring_basics.html)
+      - [Mathematics in R
+        Markdown](https://www.calvin.edu/~rpruim/courses/s341/S17/from-class/MathinRmd.html)
 
 ## R Markdown Compilation Options
 
-There are many options for formatting the output of your markdown
-document
-
-  - [html output
-    options](https://bookdown.org/yihui/rmarkdown/html-document.html)
-  - [revealjs options](https://github.com/rstudio/revealjs)
+  - There are many options for formatting the output of your markdown
+    document
+    
+      - [html
+        options](https://bookdown.org/yihui/rmarkdown/html-document.html)
+      - [revealjs options](https://github.com/rstudio/revealjs)
 
 ## Writing R (or other) Code in an R Markdown Document
 
-### Cloning and Updating with Git
+``` r
+# THIS IS SOME CODE TO RUN SIMULATIONS FOR A PAPER
 
-### Installing an R package from Github or Bitbucket
+library(Reproducible) # load functions from this package!
+library(pracma) # for sqrtm
+library(sandwich) # for robust covariance matrices
+library(lmtest) # for robust tests
+set.seed(666)
+nsim=2 # low number of sims for this example
+alpha=0.05
+# controls skewness of gamma
+shapes = c(0.5, 10)
+ns = c(25, 50, 100, 250, 500, 1000)
+SIs = c(0, 0.1, 0.25, 0.4, 0.6)
+m1s = c(1,3,5)
+m0s = c(2,5)
+rhosqs = c(0, .6)
+hetero = 1 # x variable that induces heterogeneity. 0 for none
+out = expand.grid(shape=shapes, n=ns, m1=m1s, m0=m0s, S=SIs, rhosq=rhosqs)
+params = names(out)
+out[, c('bias', 'coverage.central', 'coverage.sr', 'width.central', 'width.sr')] = NA
+# testing SI=SIs[1]; n=ns[1]; shape=shapes[1]; m1=m1s[1]; m0=m0s[1]; rhosq=rhosqs[2]; hetero=1
+for( rhosq in rhosqs){
+    for(SI in SIs){
+      for(m1 in m1s){
+      for(m0 in m0s){
+        m = m0 + m1
+        # First set of variables are covariates of interest. Next set are nuisance. No intercept
+        Vsqrt = rbind(cbind(diag(m1), matrix(sqrt(rhosq/m1/m0), nrow=m1, ncol=m0)), cbind(matrix(sqrt(rhosq/m1/m0), nrow=m0, ncol=m1), diag(m0)))
+        Vsqrt = pracma::sqrtm(Vsqrt)$B
+        if(hetero){
+          mat = diag(m1) - rhosq/m1 * matrix(1, nrow=m1, ncol=m1)
+          # For checking my math
+          #mat2 = Vsqrt %*% matrix(rnorm(m * 10000), nrow=m)
+          # X0 = mat2[(m1+1):m,]
+          # X1 = mat2[1:m1,]
+          # A and B are classical notation from Boos and Stefanski of components of the sandwich estimator
+          A = diag(m1) - matrix(1, nrow=m1, ncol=m1) * rhosq/m1
+          X1TDeltaX0X0TX1 = matrix(c(3 * rhosq/m1, rep(rhosq/m1, m1-1)), nrow=m1, ncol=m1)
+          B <- if(m1==1) matrix(3) else diag(c(3, rep(1, m1-1)) )
+          B = B + rhosq/m0/m1 * (m0 + 2 * m0 * rhosq/m1) * matrix(1, nrow=m1, ncol=m1) - (X1TDeltaX0X0TX1  + t(X1TDeltaX0X0TX1 ) )
+          Binv = solve(B)
+          beta = rep(c(SI/sqrt(sum(A %*% Binv %*% A)), 0), c(m1, m0) )
+        } else {
+          beta = rep(c(SI/sqrt(m1 * (1-rhosq)), 0), c(m1, m0)  ) # assumes constant covariance between X1 and X0 variables and independence otherwise cov(X_1) = I, cov(X_0) = I, cov(X_1, X_0) = 1 1^T rho/sqrt(m0 * m1)
+        }
+        for(n in ns){
 
-### Exporting, Documenting, and Compiling Functions
+          for(shape in shapes){
+            sim.func = function(){
+              x = matrix(rnorm(n * m), nrow=n, ncol=m ) %*% Vsqrt
+              if(hetero){
+                # here, the average variance is 1, but the variance depends on the value of x
+                y = x %*% beta + rgamma(n, shape = shape, rate = sqrt(shape/ x[,1]^2) ) - sqrt(shape * x[,1]^2) # mean of gamma will be sqrt(shape * x)
+              } else {y = x %*% beta + rgamma(n, shape = shape, rate = sqrt(shape) ) - sqrt(shape)}
+              x = as.data.frame(x)
+              modelfull = lm( as.formula(paste0('y ~ -1 + ', paste0('V', 1:m, collapse='+') )), data=x )
+              modelreduced = lm( as.formula(paste0('y ~ -1 + ', paste0('V', (m1+1):m, collapse='+') )), data=x )
+
+              chistat = waldtest(modelreduced, modelfull, vcov=vcovHC(modelfull), test = 'Chisq')
+              chi = sqrt(chistat[2,'Chisq'])
+              resdf = chistat[2,'Res.Df']
+              df = chistat[2,'Df']
+              SIhat = sqrt(max((chistat[2,'Chisq'] - df)/resdf, 0) )
+              bias = (SIhat - SI) # bias
+              CI = ncc.ints(chi, df, alpha=alpha)/sqrt(resdf)
+              widths = diff(t(CI))
+              c(bias=bias,
+                coverage.central=(SI>=CI[1,1] & SI<CI[1,2]),
+                #coverage.mdb=(SI>=CI[2,1] & SI<CI[2,2]), # HAS OPTIM ISSUES for large effect and sample sizes, I think
+                #coverage.mdr=(SI>=CI[2,1] & SI<CI[2,2]), # Also does
+                coverage.sr=(SI>=CI[2,1] & SI<CI[2,2]),
+                width.central=widths[1],
+                #width.mdb=widths[2],
+                #width.mdr=widths[2],
+                width.sr=widths[2] ) # was 4, now 3
+            }
+            cat(paste(shape, n, m1, m0, SI, rhosq, collapse=','), '\t')
+            temp = t(replicate(nsim, sim.func()))
+            out[which( out$shape==shape & out$n==n & out$m1==m1 & out$m0==m0 & out$S==SI & out$rhosq==rhosq), c('variance', 'bias', 'coverage.central', 'coverage.sr', 'width.central', 'width.sr')] = c(var(temp[,1]), colMeans(temp))
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+## This is the code to plot the simulation results.
+
+``` r
+library(lattice)
+# setwd('~/Box Sync/work/nonparametric_effect_size'); library(qwraps2); lazyload_cache_labels('graphics-simulations')
+   out[,c(1,3:6)] = sapply(names(out)[c(1,3:6)], function(x) as.factor(paste((x), out[,x], sep=' = ') ) )
+   trellis.device(color=FALSE, new=FALSE)
+    trellis.plot = xyplot(bias ~ n | S * rhosq, data=out[out$m0=='m0 = 2' & out$m1=='m1 = 3' & out$shape=='shape = 10',], type='b', lwd=2,
+      ylab='Bias', xlab = 'Sample size', ylim=c(-.15, .15), xlim=range(out$n) + c(-100, 100),
+      panel= function(x, y, ...){
+        #panel.grid(v=unique(out$ns), h=seq(-.15, .15, by=0.05))
+        panel.grid(h=-1, v=-1)
+        panel.xyplot(x, y, ..., col='black')
+        #panel.abline(h=0, col='black', ...)
+      })
+    print(trellis.plot)
+```
+
+![Example plot of simulation
+results.](README_files/figure-gfm/unnamed-chunk-6-1.png)
+
+## Updating with Git
+
+  - Now that we’ve added some simulations, we’ll push these changes to
+    github from the shell.
+  - Can also do this with mouse clicks using Rstudio.
+
+<!-- end list -->
+
+``` bash
+git add README.Rmd
+git commit -m "Added some simulations and a plot."
+git push origin master
+```
+
+# Exporting, Documenting, and Compiling Functions
+
+  - There are some R functions that I’ve already put into the R
+    directory to help me run the simulations.
+  - For example, we can open the code
+    [ncc.ints](https://github.com/simonvandekar/Reproducible/blob/master/R/ncc.R)
+    function within this package
+
+<!-- end list -->
+
+``` r
+?ncc.ints
+```
+
+## Adding functions while you work
+
+  - My nested for loop is pretty hard to read; the simulations could be
+    packaged more neatly.
+  - It might make sense to bundle parts of the code together into
+    [components](https://github.com/simonvandekar/Reproducible/blob/master/R/es_sim.R)
+    that are documented functions in this package.
+  - Then, they have their own help files and this README stays readable.
+
+## Rewritten simulation code
+
+``` r
+library(Reproducible) # load functions from this package!
+library(pracma) # for sqrtm
+library(sandwich) # for robust covariance matrices
+library(lmtest) # for robust tests
+set.seed(666)
+nsim=2 # low number of sims for this example
+alpha=0.05
+# controls skewness of gamma
+shapes = c(0.5, 10)
+ns = c(25, 50, 100, 250, 500, 1000)
+SIs = c(0, 0.1, 0.25, 0.4, 0.6)
+m1s = c(1,3,5)
+m0s = c(2,5)
+rhosqs = c(0, .6)
+hetero = 1 # x variable that induces heterogeneity. 0 for none
+out = expand.grid(shape=shapes, n=ns, m1=m1s, m0=m0s, S=SIs, rhosq=rhosqs)
+params = names(out)
+out[, c('bias', 'coverage.central', 'coverage.sr', 'width.central', 'width.sr')] = NA
+# testing SI=SIs[1]; n=ns[1]; shape=shapes[1]; m1=m1s[1]; m0=m0s[1]; rhosq=rhosqs[2]; hetero=1
+# function that collapses two compiled simulation functions.
+sim.func = function(shape, n, m1, m0, S, rhosq, hetero){
+              simparameters = simSetup(S=S, m1=m1, m0=m0, rhosq=rhosq, hetero=hetero)
+              simFunc(simparameters, shape=shape, n=n, alpha=0.05)
+            }
+for( rhosq in rhosqs){
+    for(SI in SIs){
+      for(m1 in m1s){
+      for(m0 in m0s){
+        for(n in ns){
+          for(shape in shapes){
+            cat(paste(shape, n, m1, m0, SI, rhosq, collapse=','), '\t')
+            temp = t(replicate(nsim, sim.func(shape, n, m1, m0, SI, rhosq, hetero)))
+            out[which( out$shape==shape & out$n==n & out$m1==m1 & out$m0==m0 & out$S==SI & out$rhosq==rhosq), c('variance', 'bias', 'coverage.central', 'coverage.sr', 'width.central', 'width.sr')] = c(var(temp[,1]), colMeans(temp))
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+``` 
+## 0.5 25 1 2 0 0   10 25 1 2 0 0   0.5 50 1 2 0 0  10 50 1 2 0 0   0.5 100 1 2 0 0     10 100 1 2 0 0  0.5 250 1 2 0 0     10 250 1 2 0 0  0.5 500 1 2 0 0     10 500 1 2 0 0  0.5 1000 1 2 0 0    10 1000 1 2 0 0     0.5 25 1 5 0 0  10 25 1 5 0 0   0.5 50 1 5 0 0  10 50 1 5 0 0   0.5 100 1 5 0 0     10 100 1 5 0 0  0.5 250 1 5 0 0     10 250 1 5 0 0  0.5 500 1 5 0 0     10 500 1 5 0 0  0.5 1000 1 5 0 0    10 1000 1 5 0 0     0.5 25 3 2 0 0  10 25 3 2 0 0   0.5 50 3 2 0 0  10 50 3 2 0 0   0.5 100 3 2 0 0     10 100 3 2 0 0  0.5 250 3 2 0 0     10 250 3 2 0 0  0.5 500 3 2 0 0     10 500 3 2 0 0  0.5 1000 3 2 0 0    10 1000 3 2 0 0     0.5 25 3 5 0 0  10 25 3 5 0 0   0.5 50 3 5 0 0  10 50 3 5 0 0   0.5 100 3 5 0 0     10 100 3 5 0 0  0.5 250 3 5 0 0     10 250 3 5 0 0  0.5 500 3 5 0 0     10 500 3 5 0 0  0.5 1000 3 5 0 0    10 1000 3 5 0 0     0.5 25 5 2 0 0  10 25 5 2 0 0   0.5 50 5 2 0 0  10 50 5 2 0 0   0.5 100 5 2 0 0     10 100 5 2 0 0  0.5 250 5 2 0 0     10 250 5 2 0 0  0.5 500 5 2 0 0     10 500 5 2 0 0  0.5 1000 5 2 0 0    10 1000 5 2 0 0     0.5 25 5 5 0 0  10 25 5 5 0 0   0.5 50 5 5 0 0  10 50 5 5 0 0   0.5 100 5 5 0 0     10 100 5 5 0 0  0.5 250 5 5 0 0     10 250 5 5 0 0  0.5 500 5 5 0 0     10 500 5 5 0 0  0.5 1000 5 5 0 0    10 1000 5 5 0 0     0.5 25 1 2 0.1 0    10 25 1 2 0.1 0     0.5 50 1 2 0.1 0    10 50 1 2 0.1 0     0.5 100 1 2 0.1 0   10 100 1 2 0.1 0    0.5 250 1 2 0.1 0   10 250 1 2 0.1 0    0.5 500 1 2 0.1 0   10 500 1 2 0.1 0    0.5 1000 1 2 0.1 0  10 1000 1 2 0.1 0   0.5 25 1 5 0.1 0    10 25 1 5 0.1 0     0.5 50 1 5 0.1 0    10 50 1 5 0.1 0     0.5 100 1 5 0.1 0   10 100 1 5 0.1 0    0.5 250 1 5 0.1 0   10 250 1 5 0.1 0    0.5 500 1 5 0.1 0   10 500 1 5 0.1 0    0.5 1000 1 5 0.1 0  10 1000 1 5 0.1 0   0.5 25 3 2 0.1 0    10 25 3 2 0.1 0     0.5 50 3 2 0.1 0    10 50 3 2 0.1 0     0.5 100 3 2 0.1 0   10 100 3 2 0.1 0    0.5 250 3 2 0.1 0   10 250 3 2 0.1 0    0.5 500 3 2 0.1 0   10 500 3 2 0.1 0    0.5 1000 3 2 0.1 0  10 1000 3 2 0.1 0   0.5 25 3 5 0.1 0    10 25 3 5 0.1 0     0.5 50 3 5 0.1 0    10 50 3 5 0.1 0     0.5 100 3 5 0.1 0   10 100 3 5 0.1 0    0.5 250 3 5 0.1 0   10 250 3 5 0.1 0    0.5 500 3 5 0.1 0   10 500 3 5 0.1 0    0.5 1000 3 5 0.1 0  10 1000 3 5 0.1 0   0.5 25 5 2 0.1 0    10 25 5 2 0.1 0     0.5 50 5 2 0.1 0    10 50 5 2 0.1 0     0.5 100 5 2 0.1 0   10 100 5 2 0.1 0    0.5 250 5 2 0.1 0   10 250 5 2 0.1 0    0.5 500 5 2 0.1 0   10 500 5 2 0.1 0    0.5 1000 5 2 0.1 0  10 1000 5 2 0.1 0   0.5 25 5 5 0.1 0    10 25 5 5 0.1 0     0.5 50 5 5 0.1 0    10 50 5 5 0.1 0     0.5 100 5 5 0.1 0   10 100 5 5 0.1 0    0.5 250 5 5 0.1 0   10 250 5 5 0.1 0    0.5 500 5 5 0.1 0   10 500 5 5 0.1 0    0.5 1000 5 5 0.1 0  10 1000 5 5 0.1 0   0.5 25 1 2 0.25 0   10 25 1 2 0.25 0    0.5 50 1 2 0.25 0   10 50 1 2 0.25 0    0.5 100 1 2 0.25 0  10 100 1 2 0.25 0   0.5 250 1 2 0.25 0  10 250 1 2 0.25 0   0.5 500 1 2 0.25 0  10 500 1 2 0.25 0   0.5 1000 1 2 0.25 0     10 1000 1 2 0.25 0  0.5 25 1 5 0.25 0   10 25 1 5 0.25 0    0.5 50 1 5 0.25 0   10 50 1 5 0.25 0    0.5 100 1 5 0.25 0  10 100 1 5 0.25 0   0.5 250 1 5 0.25 0  10 250 1 5 0.25 0   0.5 500 1 5 0.25 0  10 500 1 5 0.25 0   0.5 1000 1 5 0.25 0     10 1000 1 5 0.25 0  0.5 25 3 2 0.25 0   10 25 3 2 0.25 0    0.5 50 3 2 0.25 0   10 50 3 2 0.25 0    0.5 100 3 2 0.25 0  10 100 3 2 0.25 0   0.5 250 3 2 0.25 0  10 250 3 2 0.25 0   0.5 500 3 2 0.25 0  10 500 3 2 0.25 0   0.5 1000 3 2 0.25 0     10 1000 3 2 0.25 0  0.5 25 3 5 0.25 0   10 25 3 5 0.25 0    0.5 50 3 5 0.25 0   10 50 3 5 0.25 0    0.5 100 3 5 0.25 0  10 100 3 5 0.25 0   0.5 250 3 5 0.25 0  10 250 3 5 0.25 0   0.5 500 3 5 0.25 0  10 500 3 5 0.25 0   0.5 1000 3 5 0.25 0     10 1000 3 5 0.25 0  0.5 25 5 2 0.25 0   10 25 5 2 0.25 0    0.5 50 5 2 0.25 0   10 50 5 2 0.25 0    0.5 100 5 2 0.25 0  10 100 5 2 0.25 0   0.5 250 5 2 0.25 0  10 250 5 2 0.25 0   0.5 500 5 2 0.25 0  10 500 5 2 0.25 0   0.5 1000 5 2 0.25 0     10 1000 5 2 0.25 0  0.5 25 5 5 0.25 0   10 25 5 5 0.25 0    0.5 50 5 5 0.25 0   10 50 5 5 0.25 0    0.5 100 5 5 0.25 0  10 100 5 5 0.25 0   0.5 250 5 5 0.25 0  10 250 5 5 0.25 0   0.5 500 5 5 0.25 0  10 500 5 5 0.25 0   0.5 1000 5 5 0.25 0     10 1000 5 5 0.25 0  0.5 25 1 2 0.4 0    10 25 1 2 0.4 0     0.5 50 1 2 0.4 0    10 50 1 2 0.4 0     0.5 100 1 2 0.4 0   10 100 1 2 0.4 0    0.5 250 1 2 0.4 0   10 250 1 2 0.4 0    0.5 500 1 2 0.4 0   10 500 1 2 0.4 0    0.5 1000 1 2 0.4 0  10 1000 1 2 0.4 0   0.5 25 1 5 0.4 0    10 25 1 5 0.4 0     0.5 50 1 5 0.4 0    10 50 1 5 0.4 0     0.5 100 1 5 0.4 0   10 100 1 5 0.4 0    0.5 250 1 5 0.4 0   10 250 1 5 0.4 0    0.5 500 1 5 0.4 0   10 500 1 5 0.4 0    0.5 1000 1 5 0.4 0  10 1000 1 5 0.4 0   0.5 25 3 2 0.4 0    10 25 3 2 0.4 0     0.5 50 3 2 0.4 0    10 50 3 2 0.4 0     0.5 100 3 2 0.4 0   10 100 3 2 0.4 0    0.5 250 3 2 0.4 0   10 250 3 2 0.4 0    0.5 500 3 2 0.4 0   10 500 3 2 0.4 0    0.5 1000 3 2 0.4 0  10 1000 3 2 0.4 0   0.5 25 3 5 0.4 0    10 25 3 5 0.4 0     0.5 50 3 5 0.4 0    10 50 3 5 0.4 0     0.5 100 3 5 0.4 0   10 100 3 5 0.4 0    0.5 250 3 5 0.4 0   10 250 3 5 0.4 0    0.5 500 3 5 0.4 0   10 500 3 5 0.4 0    0.5 1000 3 5 0.4 0  10 1000 3 5 0.4 0   0.5 25 5 2 0.4 0    10 25 5 2 0.4 0     0.5 50 5 2 0.4 0    10 50 5 2 0.4 0     0.5 100 5 2 0.4 0   10 100 5 2 0.4 0    0.5 250 5 2 0.4 0   10 250 5 2 0.4 0    0.5 500 5 2 0.4 0   10 500 5 2 0.4 0    0.5 1000 5 2 0.4 0  10 1000 5 2 0.4 0   0.5 25 5 5 0.4 0    10 25 5 5 0.4 0     0.5 50 5 5 0.4 0    10 50 5 5 0.4 0     0.5 100 5 5 0.4 0   10 100 5 5 0.4 0    0.5 250 5 5 0.4 0   10 250 5 5 0.4 0    0.5 500 5 5 0.4 0   10 500 5 5 0.4 0    0.5 1000 5 5 0.4 0  10 1000 5 5 0.4 0   0.5 25 1 2 0.6 0    10 25 1 2 0.6 0     0.5 50 1 2 0.6 0    10 50 1 2 0.6 0     0.5 100 1 2 0.6 0   10 100 1 2 0.6 0    0.5 250 1 2 0.6 0   10 250 1 2 0.6 0    0.5 500 1 2 0.6 0   10 500 1 2 0.6 0    0.5 1000 1 2 0.6 0  10 1000 1 2 0.6 0   0.5 25 1 5 0.6 0    10 25 1 5 0.6 0     0.5 50 1 5 0.6 0    10 50 1 5 0.6 0     0.5 100 1 5 0.6 0   10 100 1 5 0.6 0    0.5 250 1 5 0.6 0   10 250 1 5 0.6 0    0.5 500 1 5 0.6 0   10 500 1 5 0.6 0    0.5 1000 1 5 0.6 0  10 1000 1 5 0.6 0   0.5 25 3 2 0.6 0    10 25 3 2 0.6 0     0.5 50 3 2 0.6 0    10 50 3 2 0.6 0     0.5 100 3 2 0.6 0   10 100 3 2 0.6 0    0.5 250 3 2 0.6 0   10 250 3 2 0.6 0    0.5 500 3 2 0.6 0   10 500 3 2 0.6 0    0.5 1000 3 2 0.6 0  10 1000 3 2 0.6 0   0.5 25 3 5 0.6 0    10 25 3 5 0.6 0     0.5 50 3 5 0.6 0    10 50 3 5 0.6 0     0.5 100 3 5 0.6 0   10 100 3 5 0.6 0    0.5 250 3 5 0.6 0   10 250 3 5 0.6 0    0.5 500 3 5 0.6 0   10 500 3 5 0.6 0    0.5 1000 3 5 0.6 0  10 1000 3 5 0.6 0   0.5 25 5 2 0.6 0    10 25 5 2 0.6 0     0.5 50 5 2 0.6 0    10 50 5 2 0.6 0     0.5 100 5 2 0.6 0   10 100 5 2 0.6 0    0.5 250 5 2 0.6 0   10 250 5 2 0.6 0    0.5 500 5 2 0.6 0   10 500 5 2 0.6 0    0.5 1000 5 2 0.6 0  10 1000 5 2 0.6 0   0.5 25 5 5 0.6 0    10 25 5 5 0.6 0     0.5 50 5 5 0.6 0    10 50 5 5 0.6 0     0.5 100 5 5 0.6 0   10 100 5 5 0.6 0    0.5 250 5 5 0.6 0   10 250 5 5 0.6 0    0.5 500 5 5 0.6 0   10 500 5 5 0.6 0    0.5 1000 5 5 0.6 0  10 1000 5 5 0.6 0   0.5 25 1 2 0 0.6    10 25 1 2 0 0.6     0.5 50 1 2 0 0.6    10 50 1 2 0 0.6     0.5 100 1 2 0 0.6   10 100 1 2 0 0.6    0.5 250 1 2 0 0.6   10 250 1 2 0 0.6    0.5 500 1 2 0 0.6   10 500 1 2 0 0.6    0.5 1000 1 2 0 0.6  10 1000 1 2 0 0.6   0.5 25 1 5 0 0.6    10 25 1 5 0 0.6     0.5 50 1 5 0 0.6    10 50 1 5 0 0.6     0.5 100 1 5 0 0.6   10 100 1 5 0 0.6    0.5 250 1 5 0 0.6   10 250 1 5 0 0.6    0.5 500 1 5 0 0.6   10 500 1 5 0 0.6    0.5 1000 1 5 0 0.6  10 1000 1 5 0 0.6   0.5 25 3 2 0 0.6    10 25 3 2 0 0.6     0.5 50 3 2 0 0.6    10 50 3 2 0 0.6     0.5 100 3 2 0 0.6   10 100 3 2 0 0.6    0.5 250 3 2 0 0.6   10 250 3 2 0 0.6    0.5 500 3 2 0 0.6   10 500 3 2 0 0.6    0.5 1000 3 2 0 0.6  10 1000 3 2 0 0.6   0.5 25 3 5 0 0.6    10 25 3 5 0 0.6     0.5 50 3 5 0 0.6    10 50 3 5 0 0.6     0.5 100 3 5 0 0.6   10 100 3 5 0 0.6    0.5 250 3 5 0 0.6   10 250 3 5 0 0.6    0.5 500 3 5 0 0.6   10 500 3 5 0 0.6    0.5 1000 3 5 0 0.6  10 1000 3 5 0 0.6   0.5 25 5 2 0 0.6    10 25 5 2 0 0.6     0.5 50 5 2 0 0.6    10 50 5 2 0 0.6     0.5 100 5 2 0 0.6   10 100 5 2 0 0.6    0.5 250 5 2 0 0.6   10 250 5 2 0 0.6    0.5 500 5 2 0 0.6   10 500 5 2 0 0.6    0.5 1000 5 2 0 0.6  10 1000 5 2 0 0.6   0.5 25 5 5 0 0.6    10 25 5 5 0 0.6     0.5 50 5 5 0 0.6    10 50 5 5 0 0.6     0.5 100 5 5 0 0.6   10 100 5 5 0 0.6    0.5 250 5 5 0 0.6   10 250 5 5 0 0.6    0.5 500 5 5 0 0.6   10 500 5 5 0 0.6    0.5 1000 5 5 0 0.6  10 1000 5 5 0 0.6   0.5 25 1 2 0.1 0.6  10 25 1 2 0.1 0.6   0.5 50 1 2 0.1 0.6  10 50 1 2 0.1 0.6   0.5 100 1 2 0.1 0.6     10 100 1 2 0.1 0.6  0.5 250 1 2 0.1 0.6     10 250 1 2 0.1 0.6  0.5 500 1 2 0.1 0.6     10 500 1 2 0.1 0.6  0.5 1000 1 2 0.1 0.6    10 1000 1 2 0.1 0.6     0.5 25 1 5 0.1 0.6  10 25 1 5 0.1 0.6   0.5 50 1 5 0.1 0.6  10 50 1 5 0.1 0.6   0.5 100 1 5 0.1 0.6     10 100 1 5 0.1 0.6  0.5 250 1 5 0.1 0.6     10 250 1 5 0.1 0.6  0.5 500 1 5 0.1 0.6     10 500 1 5 0.1 0.6  0.5 1000 1 5 0.1 0.6    10 1000 1 5 0.1 0.6     0.5 25 3 2 0.1 0.6  10 25 3 2 0.1 0.6   0.5 50 3 2 0.1 0.6  10 50 3 2 0.1 0.6   0.5 100 3 2 0.1 0.6     10 100 3 2 0.1 0.6  0.5 250 3 2 0.1 0.6     10 250 3 2 0.1 0.6  0.5 500 3 2 0.1 0.6     10 500 3 2 0.1 0.6  0.5 1000 3 2 0.1 0.6    10 1000 3 2 0.1 0.6     0.5 25 3 5 0.1 0.6  10 25 3 5 0.1 0.6   0.5 50 3 5 0.1 0.6  10 50 3 5 0.1 0.6   0.5 100 3 5 0.1 0.6     10 100 3 5 0.1 0.6  0.5 250 3 5 0.1 0.6     10 250 3 5 0.1 0.6  0.5 500 3 5 0.1 0.6     10 500 3 5 0.1 0.6  0.5 1000 3 5 0.1 0.6    10 1000 3 5 0.1 0.6     0.5 25 5 2 0.1 0.6  10 25 5 2 0.1 0.6   0.5 50 5 2 0.1 0.6  10 50 5 2 0.1 0.6   0.5 100 5 2 0.1 0.6     10 100 5 2 0.1 0.6  0.5 250 5 2 0.1 0.6     10 250 5 2 0.1 0.6  0.5 500 5 2 0.1 0.6     10 500 5 2 0.1 0.6  0.5 1000 5 2 0.1 0.6    10 1000 5 2 0.1 0.6     0.5 25 5 5 0.1 0.6  10 25 5 5 0.1 0.6   0.5 50 5 5 0.1 0.6  10 50 5 5 0.1 0.6   0.5 100 5 5 0.1 0.6     10 100 5 5 0.1 0.6  0.5 250 5 5 0.1 0.6     10 250 5 5 0.1 0.6  0.5 500 5 5 0.1 0.6     10 500 5 5 0.1 0.6  0.5 1000 5 5 0.1 0.6    10 1000 5 5 0.1 0.6     0.5 25 1 2 0.25 0.6     10 25 1 2 0.25 0.6  0.5 50 1 2 0.25 0.6     10 50 1 2 0.25 0.6  0.5 100 1 2 0.25 0.6    10 100 1 2 0.25 0.6     0.5 250 1 2 0.25 0.6    10 250 1 2 0.25 0.6     0.5 500 1 2 0.25 0.6    10 500 1 2 0.25 0.6     0.5 1000 1 2 0.25 0.6   10 1000 1 2 0.25 0.6    0.5 25 1 5 0.25 0.6     10 25 1 5 0.25 0.6  0.5 50 1 5 0.25 0.6     10 50 1 5 0.25 0.6  0.5 100 1 5 0.25 0.6    10 100 1 5 0.25 0.6     0.5 250 1 5 0.25 0.6    10 250 1 5 0.25 0.6     0.5 500 1 5 0.25 0.6    10 500 1 5 0.25 0.6     0.5 1000 1 5 0.25 0.6   10 1000 1 5 0.25 0.6    0.5 25 3 2 0.25 0.6     10 25 3 2 0.25 0.6  0.5 50 3 2 0.25 0.6     10 50 3 2 0.25 0.6  0.5 100 3 2 0.25 0.6    10 100 3 2 0.25 0.6     0.5 250 3 2 0.25 0.6    10 250 3 2 0.25 0.6     0.5 500 3 2 0.25 0.6    10 500 3 2 0.25 0.6     0.5 1000 3 2 0.25 0.6   10 1000 3 2 0.25 0.6    0.5 25 3 5 0.25 0.6     10 25 3 5 0.25 0.6  0.5 50 3 5 0.25 0.6     10 50 3 5 0.25 0.6  0.5 100 3 5 0.25 0.6    10 100 3 5 0.25 0.6     0.5 250 3 5 0.25 0.6    10 250 3 5 0.25 0.6     0.5 500 3 5 0.25 0.6    10 500 3 5 0.25 0.6     0.5 1000 3 5 0.25 0.6   10 1000 3 5 0.25 0.6    0.5 25 5 2 0.25 0.6     10 25 5 2 0.25 0.6  0.5 50 5 2 0.25 0.6     10 50 5 2 0.25 0.6  0.5 100 5 2 0.25 0.6    10 100 5 2 0.25 0.6     0.5 250 5 2 0.25 0.6    10 250 5 2 0.25 0.6     0.5 500 5 2 0.25 0.6    10 500 5 2 0.25 0.6     0.5 1000 5 2 0.25 0.6   10 1000 5 2 0.25 0.6    0.5 25 5 5 0.25 0.6     10 25 5 5 0.25 0.6  0.5 50 5 5 0.25 0.6     10 50 5 5 0.25 0.6  0.5 100 5 5 0.25 0.6    10 100 5 5 0.25 0.6     0.5 250 5 5 0.25 0.6    10 250 5 5 0.25 0.6     0.5 500 5 5 0.25 0.6    10 500 5 5 0.25 0.6     0.5 1000 5 5 0.25 0.6   10 1000 5 5 0.25 0.6    0.5 25 1 2 0.4 0.6  10 25 1 2 0.4 0.6   0.5 50 1 2 0.4 0.6  10 50 1 2 0.4 0.6   0.5 100 1 2 0.4 0.6     10 100 1 2 0.4 0.6  0.5 250 1 2 0.4 0.6     10 250 1 2 0.4 0.6  0.5 500 1 2 0.4 0.6     10 500 1 2 0.4 0.6  0.5 1000 1 2 0.4 0.6    10 1000 1 2 0.4 0.6     0.5 25 1 5 0.4 0.6  10 25 1 5 0.4 0.6   0.5 50 1 5 0.4 0.6  10 50 1 5 0.4 0.6   0.5 100 1 5 0.4 0.6     10 100 1 5 0.4 0.6  0.5 250 1 5 0.4 0.6     10 250 1 5 0.4 0.6  0.5 500 1 5 0.4 0.6     10 500 1 5 0.4 0.6  0.5 1000 1 5 0.4 0.6    10 1000 1 5 0.4 0.6     0.5 25 3 2 0.4 0.6  10 25 3 2 0.4 0.6   0.5 50 3 2 0.4 0.6  10 50 3 2 0.4 0.6   0.5 100 3 2 0.4 0.6     10 100 3 2 0.4 0.6  0.5 250 3 2 0.4 0.6     10 250 3 2 0.4 0.6  0.5 500 3 2 0.4 0.6     10 500 3 2 0.4 0.6  0.5 1000 3 2 0.4 0.6    10 1000 3 2 0.4 0.6     0.5 25 3 5 0.4 0.6  10 25 3 5 0.4 0.6   0.5 50 3 5 0.4 0.6  10 50 3 5 0.4 0.6   0.5 100 3 5 0.4 0.6     10 100 3 5 0.4 0.6  0.5 250 3 5 0.4 0.6     10 250 3 5 0.4 0.6  0.5 500 3 5 0.4 0.6     10 500 3 5 0.4 0.6  0.5 1000 3 5 0.4 0.6    10 1000 3 5 0.4 0.6     0.5 25 5 2 0.4 0.6  10 25 5 2 0.4 0.6   0.5 50 5 2 0.4 0.6  10 50 5 2 0.4 0.6   0.5 100 5 2 0.4 0.6     10 100 5 2 0.4 0.6  0.5 250 5 2 0.4 0.6     10 250 5 2 0.4 0.6  0.5 500 5 2 0.4 0.6     10 500 5 2 0.4 0.6  0.5 1000 5 2 0.4 0.6    10 1000 5 2 0.4 0.6     0.5 25 5 5 0.4 0.6  10 25 5 5 0.4 0.6   0.5 50 5 5 0.4 0.6  10 50 5 5 0.4 0.6   0.5 100 5 5 0.4 0.6     10 100 5 5 0.4 0.6  0.5 250 5 5 0.4 0.6     10 250 5 5 0.4 0.6  0.5 500 5 5 0.4 0.6     10 500 5 5 0.4 0.6  0.5 1000 5 5 0.4 0.6    10 1000 5 5 0.4 0.6     0.5 25 1 2 0.6 0.6  10 25 1 2 0.6 0.6   0.5 50 1 2 0.6 0.6  10 50 1 2 0.6 0.6   0.5 100 1 2 0.6 0.6     10 100 1 2 0.6 0.6  0.5 250 1 2 0.6 0.6     10 250 1 2 0.6 0.6  0.5 500 1 2 0.6 0.6     10 500 1 2 0.6 0.6  0.5 1000 1 2 0.6 0.6    10 1000 1 2 0.6 0.6     0.5 25 1 5 0.6 0.6  10 25 1 5 0.6 0.6   0.5 50 1 5 0.6 0.6  10 50 1 5 0.6 0.6   0.5 100 1 5 0.6 0.6     10 100 1 5 0.6 0.6  0.5 250 1 5 0.6 0.6     10 250 1 5 0.6 0.6  0.5 500 1 5 0.6 0.6     10 500 1 5 0.6 0.6  0.5 1000 1 5 0.6 0.6    10 1000 1 5 0.6 0.6     0.5 25 3 2 0.6 0.6  10 25 3 2 0.6 0.6   0.5 50 3 2 0.6 0.6  10 50 3 2 0.6 0.6   0.5 100 3 2 0.6 0.6     10 100 3 2 0.6 0.6  0.5 250 3 2 0.6 0.6     10 250 3 2 0.6 0.6  0.5 500 3 2 0.6 0.6     10 500 3 2 0.6 0.6  0.5 1000 3 2 0.6 0.6    10 1000 3 2 0.6 0.6     0.5 25 3 5 0.6 0.6  10 25 3 5 0.6 0.6   0.5 50 3 5 0.6 0.6  10 50 3 5 0.6 0.6   0.5 100 3 5 0.6 0.6     10 100 3 5 0.6 0.6  0.5 250 3 5 0.6 0.6     10 250 3 5 0.6 0.6  0.5 500 3 5 0.6 0.6     10 500 3 5 0.6 0.6  0.5 1000 3 5 0.6 0.6    10 1000 3 5 0.6 0.6     0.5 25 5 2 0.6 0.6  10 25 5 2 0.6 0.6   0.5 50 5 2 0.6 0.6  10 50 5 2 0.6 0.6   0.5 100 5 2 0.6 0.6     10 100 5 2 0.6 0.6  0.5 250 5 2 0.6 0.6     10 250 5 2 0.6 0.6  0.5 500 5 2 0.6 0.6     10 500 5 2 0.6 0.6  0.5 1000 5 2 0.6 0.6    10 1000 5 2 0.6 0.6     0.5 25 5 5 0.6 0.6  10 25 5 5 0.6 0.6   0.5 50 5 5 0.6 0.6  10 50 5 5 0.6 0.6   0.5 100 5 5 0.6 0.6     10 100 5 5 0.6 0.6  0.5 250 5 5 0.6 0.6     10 250 5 5 0.6 0.6  0.5 500 5 5 0.6 0.6     10 500 5 5 0.6 0.6  0.5 1000 5 5 0.6 0.6    10 1000 5 5 0.6 0.6     
+```
 
 # Other stuff
 
 ## Disclaimers
 
-I am not an expert in reproducible methods and am actively learning the
-best way to do reproducible research using R Markdown, Git, and Docker.
-The R Markdown document is conducive with other languages, such as
-Python, Bash, and Stan. There are other tools (e.g. Jupyter Notebook)
-that have similar functionality and **may** be better suited for other
-programming languages.
+  - I am not an expert in reproducible software and am actively learning
+    the best way to do reproducible research using R Markdown, Git, and
+    Docker.
+  - The R Markdown document is conducive with other languages, such as
+    Python, Bash, and Stan.
+  - There are other tools (e.g. Jupyter Notebook) that have similar
+    functionality and **may** be better suited for other programming
+    languages.
 
 ## Important Resources That I Have Neglected
 
-There are many important tools that I have (embarrassingly) neglected to
-talk about because I have not learned them myself (e.g. `tidyverse`,
-`testthat`).
+  - There are many important tools that I have neglected to talk about
+    because I have not learned them myself (embarrassingly ; e.g.
+    `tidyverse`, `testthat`).
+
+  - [tidyverse](https://www.tidyverse.org/)
 
   - [CRAN Reproducible
     Research](https://cran.r-project.org/web/views/ReproducibleResearch.html)

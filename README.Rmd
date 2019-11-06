@@ -4,6 +4,11 @@ author:
  Simon Vandekar, Ali Valcarcel \n
 date: "`r format(Sys.time(), '%d %B %Y')`"
 output:
+  github_document:
+    html_preview: true
+  html_document:
+    toc: true
+    toc_float: true
   revealjs::revealjs_presentation:
     theme: moon
     highlight: zenburn
@@ -11,11 +16,6 @@ output:
       slideNumber: true
       previewLinks: true
       center: true
-  html_document:
-    toc: true
-    toc_float: true
-  github_document:
-    html_preview: true
 ---
 
 
