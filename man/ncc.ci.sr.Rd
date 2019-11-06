@@ -11,7 +11,7 @@ ncc.ci.sr(y, p, alpha = 0.05)
 
 \item{p}{integer, degrees of freedom.}
 
-\item{alpha, }{probability for confidence interval.}
+\item{alpha}{probability for confidence interval.}
 }
 \description{
 Code taken by SNV from https://www1.maths.leeds.ac.uk/~john/software/ncc/ncc.r.

@@ -49,7 +49,7 @@ lambound=function(y,p,alpha) {
 #'
 #' @param y numeric, value of chi random variable.
 #' @param p integer, degrees of freedom.
-#' @param alpha, probability.
+#' @param alpha probability.
 #' @importFrom stats uniroot
 lamfind=function(y,p,alpha) {
   if(alpha<1e-4 | F(y,p,0)<alpha) stop("bad lamfind")
@@ -66,7 +66,7 @@ lamfind=function(y,p,alpha) {
 #' @export
 #' @param y numeric, value of chi random variable.
 #' @param p integer, degrees of freedom.
-#' @param alpha, probability for confidence interval.
+#' @param alpha probability for confidence interval.
 ncc.ci.central=function(y,p,alpha=0.05) {
   u1=Finv(alpha/2,p,0); u2=Finv(1-alpha/2,p,0)
   if(y<=u1) {ll=NaN; lu=NaN}
@@ -93,7 +93,7 @@ ncc.ci.central=function(y,p,alpha=0.05) {
 #' @export
 #' @param y numeric, value of chi random variable.
 #' @param p integer, degrees of freedom.
-#' @param alpha, probability for confidence interval.
+#' @param alpha probability for confidence interval.
 ncc.ci.sr=function(y,p,alpha=0.05) {
   u0=Finv(1-alpha,p,0)
   if(y<=u0) ll=0

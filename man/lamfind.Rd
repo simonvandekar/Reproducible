@@ -11,7 +11,7 @@ lamfind(y, p, alpha)
 
 \item{p}{integer, degrees of freedom.}
 
-\item{alpha, }{probability.}
+\item{alpha}{probability.}
 }
 \description{
 Code taken by SNV from https://www1.maths.leeds.ac.uk/~john/software/ncc/ncc.r.
