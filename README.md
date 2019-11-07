@@ -40,21 +40,28 @@ Simon Vandekar, Ali Valcarcel
         in a single set of documents.
       - Most statisticians use `R` as their primary statistical language
         – state-of-the-art methods are available soonest in `R`
+      - There are great imaging resources in R freely available via
+        [Neuroconductor](https://neuroconductor.org/)
 
 ## Point of This Tutorial
 
+  - These notes are a reproducible R package about making reproducible R
+    packages (sort of like a [coffee table book about coffee
+    tables](https://www.youtube.com/watch?v=3QjTPA-Ib9E)).
   - This tutorial is designed to show you that it is possible to do
     fully reproducible research using R Markdown and (hopefully) that it
     is accessible without too much effort.
   - It is a high overview of what can be done with R Markdown, Git, and
     R.
   - There are links to resources throughout; feel free to explore.
-    <p>
-    </p>
-    <p>
-    </p>
-    ### Not the Point of This Tutorial:
+
+## Not the Point of This Tutorial:
+
   - This tutorial is not designed to teach you the basics of R (sorry).
+  - This is not really going to show you details of how, but you can get
+    some of that from the links.
+  - As you’re reading, if you have suggestions of good resources, I
+    encourage you to [email me](simon.vandekar@vanderbilt.edu).
 
 # Installing R and Rstudio
 
@@ -165,9 +172,9 @@ devtools::install_github('simonvandekar/Reproducible', force=TRUE) # force just 
 
     ## 
     ##   
-       checking for file ‘/private/var/folders/m9/qpvyktss12d_c8fjdt840h3w0000gn/T/RtmpIKoOuF/remotes66f37850ee7e/simonvandekar-Reproducible-ea14c7b/DESCRIPTION’ ...
+       checking for file ‘/private/var/folders/m9/qpvyktss12d_c8fjdt840h3w0000gn/T/Rtmp2i6WOR/remotes6b8a57b2e02d/simonvandekar-Reproducible-195435a/DESCRIPTION’ ...
       
-    ✔  checking for file ‘/private/var/folders/m9/qpvyktss12d_c8fjdt840h3w0000gn/T/RtmpIKoOuF/remotes66f37850ee7e/simonvandekar-Reproducible-ea14c7b/DESCRIPTION’
+    ✔  checking for file ‘/private/var/folders/m9/qpvyktss12d_c8fjdt840h3w0000gn/T/Rtmp2i6WOR/remotes6b8a57b2e02d/simonvandekar-Reproducible-195435a/DESCRIPTION’
     ## 
       
     ─  preparing ‘Reproducible’:
@@ -449,3 +456,9 @@ for( rhosq in rhosqs){
 
   - [CRAN Reproducible
     Research](https://cran.r-project.org/web/views/ReproducibleResearch.html)
+
+## Your input
+
+  - If you have any suggestions about useful links on this material,
+    contact me
+      - <simon.vandekar@vanderbilt.edu>
