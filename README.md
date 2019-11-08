@@ -1,7 +1,7 @@
 Reproducible Research in R and R Markdown
 ================
 Simon Vandekar, Ali Valcarcel
-06 November 2019
+08 November 2019
 
 # What is Reproducible Research?
 
@@ -138,23 +138,6 @@ cd ~/
 git clone https://github.com/simonvandekar/Reproducible
 ```
 
-## Structure of an R package
-
-### An R package is a bunch of functions related to a certain project.
-
-![](inst/images/packagestructure.png)
-
-## Structure of an R package
-
-  - `R/` – directory for R functions that make up
-  - `src/` – directory of C++ functions that you’ve wrapped into `R`
-    using `Rcpp`
-  - `vignettes/` – directory of one or more Markdown documents to
-    illustrate use of package
-  - `README.Rmd` – the uncompiled version of this document
-  - `README.*` – other compiled versions of this document
-  - `DESCRIPTION` – stuff about package you would need to edit
-
 ## Installing an R package from github
 
   - If someone else has made an R package for their reproducible
@@ -172,9 +155,9 @@ devtools::install_github('simonvandekar/Reproducible', force=TRUE) # force just 
 
     ## 
     ##   
-       checking for file ‘/private/var/folders/m9/qpvyktss12d_c8fjdt840h3w0000gn/T/Rtmp2i6WOR/remotes6b8a57b2e02d/simonvandekar-Reproducible-195435a/DESCRIPTION’ ...
+       checking for file ‘/private/var/folders/m9/qpvyktss12d_c8fjdt840h3w0000gn/T/RtmpDSqjw7/remotes909147c19894/simonvandekar-Reproducible-65c9833/DESCRIPTION’ ...
       
-    ✔  checking for file ‘/private/var/folders/m9/qpvyktss12d_c8fjdt840h3w0000gn/T/Rtmp2i6WOR/remotes6b8a57b2e02d/simonvandekar-Reproducible-195435a/DESCRIPTION’
+    ✔  checking for file ‘/private/var/folders/m9/qpvyktss12d_c8fjdt840h3w0000gn/T/RtmpDSqjw7/remotes909147c19894/simonvandekar-Reproducible-65c9833/DESCRIPTION’
     ## 
       
     ─  preparing ‘Reproducible’:
@@ -206,7 +189,24 @@ devtools::install_github('simonvandekar/Reproducible', force=TRUE) # force just 
     ## Installing package into '/usr/local/lib/R/3.6/site-library'
     ## (as 'lib' is unspecified)
 
-## Your project workflow can map directly onto and R package
+## Structure of an R package
+
+### An R package is a bunch of functions related to a certain project.
+
+![](inst/images/packagestructure.png)
+
+## Structure of an R package
+
+  - `R/` – directory for R functions that make up
+  - `src/` – directory of C++ functions that you’ve wrapped into `R`
+    using `Rcpp`
+  - `vignettes/` – directory of one or more Markdown documents to
+    illustrate use of package
+  - `README.Rmd` – the uncompiled version of this document
+  - `README.*` – other compiled versions of this document
+  - `DESCRIPTION` – stuff about package you would need to edit
+
+## Your project workflow can map directly onto an R package
 
 ![](inst/images/projectworkflow.png)
 

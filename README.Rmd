@@ -120,6 +120,14 @@ git clone https://github.com/simonvandekar/Reproducible
 ```
 
 
+## Installing an R package from github
+
+ * If someone else has made an R package for their reproducible research and stored it on github you can install it on your system
+ * For example, install [this package](https://github.com/simonvandekar/Reproducible):
+ 
+```{r}
+devtools::install_github('simonvandekar/Reproducible', force=TRUE) # force just forces reinstall even if there is no update since previous install
+```
 
 ## Structure of an R package
 
@@ -136,17 +144,9 @@ git clone https://github.com/simonvandekar/Reproducible
  * `README.*` -- other compiled versions of this document
  * `DESCRIPTION` -- stuff about package you would need to edit
 
-## Installing an R package from github
-
- * If someone else has made an R package for their reproducible research and stored it on github you can install it on your system
- * For example, install [this package](https://github.com/simonvandekar/Reproducible):
- 
-```{r}
-devtools::install_github('simonvandekar/Reproducible', force=TRUE) # force just forces reinstall even if there is no update since previous install
-```
  
 
-## Your project workflow can map directly onto and R package
+## Your project workflow can map directly onto an R package
 ![](inst/images/projectworkflow.png)
 
 
