@@ -4,11 +4,6 @@ author:
  Simon Vandekar, Ali Valcarcel \n
 date: "`r format(Sys.time(), '%d %B %Y')`"
 output:
-  github_document:
-    html_preview: true
-  html_document:
-    toc: true
-    toc_float: true
   revealjs::revealjs_presentation:
     theme: moon
     highlight: zenburn
@@ -16,6 +11,11 @@ output:
       slideNumber: true
       previewLinks: true
       center: true
+  html_document:
+    toc: true
+    toc_float: true
+  github_document:
+    html_preview: true
 ---
 
 
@@ -125,6 +125,7 @@ git clone https://github.com/simonvandekar/Reproducible
  * If someone else has made an R package for their reproducible research and stored it on github you can install it on your system
  * For example, install [this package](https://github.com/simonvandekar/Reproducible):
  
+ 
 ```{r}
 devtools::install_github('simonvandekar/Reproducible', force=TRUE) # force just forces reinstall even if there is no update since previous install
 ```
@@ -171,6 +172,13 @@ devtools::install_github('simonvandekar/Reproducible', force=TRUE) # force just 
 
    + [html options](https://bookdown.org/yihui/rmarkdown/html-document.html)
    + [revealjs options](https://github.com/rstudio/revealjs)
+
+
+
+
+
+
+
 
 ## Writing R (or other) Code in an R Markdown Document
 
