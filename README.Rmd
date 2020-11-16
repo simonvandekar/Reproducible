@@ -1,7 +1,5 @@
 ---
 title: "Reproducible Research in R and R Markdown"
-author:
- Simon Vandekar, Ali Valcarcel \n
 date: "`r format(Sys.time(), '%d %B %Y')`"
 output:
   revealjs::revealjs_presentation:
